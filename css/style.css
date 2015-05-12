@@ -1,0 +1,36 @@
+body{
+  background: rgba(150,150,150,1);
+
+}
+header{
+  background: rgba(0,0,0,1);
+  text-align: center;
+  padding: 20px;
+  font-size: 26px;
+  font-weight: bolder;
+  color: rgba(200,0,0,1);
+  margin-bottom: 10px;
+}
+
+#container{
+  background: black;
+  width: 80%;
+  margin: 0 auto; 
+  padding: 2%;
+  color: rgba(150,0,0,1);
+  border: 1px solid red;
+  box-shadow: 0 0 8px rgba(40,40,40,1);
+  border-radius: 4px;
+
+}
+
+#videoBox{
+  margin:10px 10px;
+  display: inline-block;;
+}
+#content{
+
+}
+footer{
+
+}
