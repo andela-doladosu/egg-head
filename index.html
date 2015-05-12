@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/angular.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    </head>
+    <body ng-app="egghead">
+        <div ng-controller="MainCtrl">
+            <button ng-click="save()">Save</button>
+            <button ng-click="load()">Load</button>
+            <br>
+            <ul>
+              <li ng-repeat="x in titles">{{x}}</li>
+            </ul>
+           
+        </div>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/mainController.js"></script>
+    
+    </body>
+</html>
+
+
