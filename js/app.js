@@ -1,1 +1,1 @@
-var eggHeadApp = angular.module('egghead', ['LocalStorageModule']);
+var eggHeadApp = angular.module('egghead', ['LocalStorageModule','ngSanitize']);
