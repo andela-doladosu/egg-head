@@ -2,37 +2,90 @@
 <html>
   <head>
 	<link href="css/style.css" rel="stylesheet" />
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
 	<script src="js/angular.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 	</head>
+  
 	<body ng-app="egghead">
-		<div ng-controller="MainCtrl">
-			Video title<input type='text' ng-model='videoTitle'><br/>
-			Video link<input type='text' ng-model='videoLink'><br/>
-			<button ng-click="addVideo()">Save</button>
-			<button ng-click="getAllVideos()">Load</button>
-			<button ng-click="actionKey()">Do action</button>
-      <button ng-click="clearAll()">Clear all</button>
-			<br>
-			<ul>
-			 <li ng-repeat="video in videoLinks">
-        <div class="videoBox inlineDiv">
-          <iframe width="" height="200" ng-src="{{video.link | trusted}}" frameborder="0" allowfullscreen></iframe>
-          <br /> Title: {{video.title}}
-          <br /> Link: {{video.link}}
-          <br /> likes: {{video.likes}}
-          <button ng-click="deleteVideo(video.videoId)">Delete</button>
-          <div class="inlineDiv" ng-click="likeVideo(video.videoId)">Like</div>
+    <div class="container"  ng-controller="MainCtrl">
+      <div class="row">
+        <div class="masthead">
+          <h3 class="text-muted">Wise Potato</h3>
         </div>
-				
-			 </li>
-			</ul>
-		</div>
-	<script src="js/app.js"></script>
-	<script src="js/controllers/mainController.js"></script>
-	
-	</body>
-</html>
+    		<div>
+          <button class="btn btn-success" type="button" id="addNewVideo">Add a Video</button>
+    			<button ng-click="getAllVideos()">Load</button>
+          <button ng-click="clearAll()">Clear all</button>
+    			<div id="ulHolder">
+            <ul>
+      			 <li ng-repeat="video in videoLinks">
+              <div class="videoBox inlineDiv">
+                <iframe width="" height="200" ng-src="{{video.link | trusted}}" frameborder="0" allowfullscreen></iframe>
+                <br /> Title: {{video.title}}
+                <br /> 
+                <button class="btn btn-primary" type="button" ng-click="likeVideo(video.videoId)">
+                 Likes <span class="badge" >{{video.likes}}</span>
+                </button>
+                <button class="editButton btn btn-primary" type="button" ng-click="editAVideo(video.videoId)">Edit
+                </button>
+                <button class="btn btn-danger deleteButton" type="button" ng-click="deleteVideo(video.videoId)">Delete
+                </button>
+              </div>
+      			 </li>
+      			</ul>
+          </div><!--ulHolder div ends-->
+    		</div><!--controller div ends-->
+        <div id="addVideoBackDrop"> 
+          <div id="addVideoDiv">
+            <div id="addVideoHead">
+              <h3 class="text-muted">Add A New Video</h3>
+            </div><!--addVideoHead div ends-->
+            <div id="addVideoBody">
+               <label>Title:</label> 
+                <input type="text" class="form-control" name="title" placeholder="Video Title" ng-model="videoTitle">
+               <label>Link:</label>
+                <input type="text" class="form-control" name="title" placeholder="Video Link" ng-model="videoLink">
+            </div><!--addVideoBody ends-->
+            <div id="addVideoFooter">
+              <button type="button" id="addVideoButton" class="btn btn-success" ng-click="addVideo()">ADD</button>
+              <button type="button" class="btn btn-danger cancelAddButton" >CANCEL</button>
+            </div><!--addVideoFooter ends-->
+          </div><!--addVideo div ends-->
+        </div><!--backDropDiv div ends-->
+
+        <div id="editVideoBackDrop">
+          <div id="editVideoDiv">
+            <div id="editVideoHead">
+              <h3 class="text-muted">Edit Video</h3>
+            </div><!--editVideoHead div ends-->
+            <div id="editVideoBody">
+               <label>Title:</label> 
+                <input type="text" class="form-control" name="title" placeholder="New Title"  ng-model="editVideoTitle">
+               <label>Link:</label>
+                <input type="text" class="form-control" name="title" placeholder="New Link"  ng-model="editVideoLink">
+            </div><!--editVideoBody ends-->
+            <div id="editVideoFooter">
+              <button type="button" class="btn btn-success" id="saveVideoButton" ng-click="saveEditedVideo()">SAVE</button>
+              <button type="button" class="btn btn-danger cancelEditVideo">CANCEL</button>
+
+            </div><!--editVideoFooter ends-->
+          </div><!--editNewVideo div ends-->
+        </div><!--backDropDiv div ends-->
 
 
+
+
+    	<script src="js/app.js"></script>
+    	<script src="js/controllers/mainController.js"></script>
+      </div><!--row div ends-->
+  	</div><!--container div ends-->
+    
+
+
+    

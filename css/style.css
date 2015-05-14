@@ -26,12 +26,21 @@ header{
 
 li{
   list-style-type: none;
+  display: inline-block;
+
+}
+#ulHolder{
+  margin: 0;
+  margin-top: 50px;
 }
 
 .videoBox{
-  margin:10px 10px; 
-  float: left;
-  border:1px solid red;
+  margin:10px 10px;
+  margin-left: 0px; 
+  padding: 8px;
+  box-shadow: 0 0 2px silver;
+  border-radius: 8px;
+ 
 }
 .inlineDiv{
   display: inline-block;
@@ -39,6 +48,78 @@ li{
 #content{
 
 }
+iframe{
+  border-radius: 8px;
+}
 footer{
 
+}
+
+.deleteButton{
+  float: right;
+}
+
+ #editVideoDiv{
+  box-shadow: 0 0 8px silver;
+  border-radius: 8px;
+  max-width: 300px;
+  position: absolute;
+  display: none;
+  margin: 5% 30%;
+  z-index: 200;
+  background: white;
+}
+
+#addVideoDiv{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  box-shadow: 0 0 8px silver;
+  border-radius: 8px;
+  max-width: 300px;
+  position: absolute;
+  display: none;
+  margin: 5% 30%;
+  z-index: 200;
+  background: white;
+}
+
+
+#addVideoHead, #editVideoHead{
+  padding-top: 8px; 
+  padding-bottom: 8px; 
+  text-align: center;
+  font-size: 24px;
+  font-weight: bolder;
+  color: silver;
+  box-shadow: 0 0 3px silver;
+}
+
+#addVideoBody, #editVideoBody{
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#addVideoFooter, #editVideoFooter{
+  padding-top:14px; 
+  padding-bottom:8px;
+  padding-left: 30px;
+  font-weight: bolder;
+  color: silver;
+  box-shadow: 0 0 3px silver;
+}
+
+#addVideoBackDrop,#editVideoBackDrop{
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  margin: 0 auto;
+  background: silver;
+  width: 60%;
+  height: 99%;
+  box-shadow: 0 0 200px black;
+  border-radius: 20px;
+  display: none;
+  z-index: 20;
 }
