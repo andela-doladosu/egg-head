@@ -1,6 +1,5 @@
 body{
   background: rgba(150,150,150,1);
-
 }
 header{
   background: rgba(0,0,0,1);
@@ -36,7 +35,8 @@ li{
 
 .videoBox{
   margin:10px 10px;
-  margin-left: 0px; 
+  margin-left: 0px;
+  margin-right: 40px; 
   padding: 8px;
   box-shadow: 0 0 2px silver;
   border-radius: 8px;
@@ -60,7 +60,7 @@ footer{
 }
 
  #editVideoDiv{
-  box-shadow: 0 0 8px silver;
+  box-shadow: 0 0 8px black;
   border-radius: 8px;
   max-width: 300px;
   position: absolute;
@@ -74,7 +74,7 @@ footer{
   position: fixed;
   top: 20px;
   left: 20px;
-  box-shadow: 0 0 8px silver;
+  box-shadow: 0 0 8px black;
   border-radius: 8px;
   max-width: 300px;
   position: absolute;
@@ -118,7 +118,7 @@ footer{
   background: silver;
   width: 60%;
   height: 99%;
-  box-shadow: 0 0 200px black;
+  box-shadow: 0 0 140px black;
   border-radius: 20px;
   display: none;
   z-index: 20;

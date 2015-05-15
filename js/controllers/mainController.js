@@ -1,20 +1,20 @@
  eggHeadApp.controller('MainCtrl', ['$scope','localStorageService','$sce', function($scope, localStorageService, $sce) {
+  //Intially get all stored videos' details from localstorage
   getAllVideos = function(){
-    lskeys = localStorageService.keys();
-    //console.log(lskeys);
-    $scope.videoLinks = [];
-    lskeys = lskeys.sort(function(a,b){return a - b;});
+    lskeys = localStorageService.keys();//get stored keys into lskeys array
+    $scope.videoLinks = [];//define array to hold video details which are objects
+    lskeys = lskeys.sort(function(a,b){return a - b;});//ensure the keys are in ascending order
     for(key in lskeys){
-      $scope.videoLinks.push(localStorageService.get(lskeys[key]));
+      $scope.videoLinks.push(localStorageService.get(lskeys[key]));//push objects into predefined array
     }
-  }
+  };
 
-
+  //give unique id to a new entry
   assignId = function(){
-    if(last_key == undefined){
+    if(last_key == undefined){//if last_key is undefined, no video exists in local storage, set it to 0
       last_key = 0;
     }else{
-      last_key = Number(last_key) + 1;
+      last_key = Number(last_key) + 1;//increase last key by one
     }
     id = last_key;
   };
@@ -23,14 +23,21 @@
 
   $scope.clearAll = function(){
     localStorageService.clearAll();
+    $scope.videoLinks = [];
+  };
+
+  getEmbedLink = function(givenLink){
+    videoAddress = givenLink.split('=')[1];
+    embedLink = 'https://www.youtube.com/embed/'+videoAddress;
+    return embedLink;
   };
 
   $scope.addVideo = function(){
     $('.addInput').val("");
-    console.log('adding a video');
     submittedLink = $scope.videoLink;
-    videoAddress = submittedLink.split('=')[1];
-    newVideoLink = 'https://www.youtube.com/embed/'+videoAddress;
+    newVideoLink = getEmbedLink(submittedLink);
+    
+    
 
     prevKeys = localStorageService.keys().sort(function(a,b){return a-b;});//get existing keys (array)
     last_key = prevKeys[prevKeys.length - 1];//select last key (number)
@@ -44,10 +51,12 @@
       likes : 0
     } 
 
+    console.log(video);    
+
     if(id == 0){//no previous video in localstorage, currrent entry cant be a duplicate
       localStorageService.set(id, video);
       $scope.videoLinks.push(video);
-      console.log('video added');
+      console.log('first video added');
     }else{
       lastEntry = localStorageService.get(id-1);//get details of the last entry (object)
       if(lastEntry.link == video.link && lastEntry.title == video.title){
@@ -55,11 +64,16 @@
       }else{
         localStorageService.set(id, video);
         $scope.videoLinks.push(video);
-        console.log('video added');
+        console.log('next video added');
       }
     } 
 
+  };
 
+  $scope.showEditBox = function(){
+    $('.editButton').on('click',function(){
+      $('#editVideoDiv,#editVideoBackDrop').toggle(500);
+    });
   };
 
   $scope.deleteVideo = function(id){
@@ -91,25 +105,31 @@
   $scope.editVideoId = '';
 
   $scope.editAVideo = function(id){
+    $('.editButton').click(function(){
+    $('#editVideoDiv,#editVideoBackDrop').show(500);});
+    console.log(id);
     oldVid = localStorageService.get(id);
     $scope.editVideoLink = oldVid.link;
     $scope.editVideoTitle = oldVid.title;
     $scope.editVideoId = id;
-
   };
 
   $scope.saveEditedVideo = function(){
     id = $scope.editVideoId;
-    console.log(id);
     videoToEdit = localStorageService.get(id);
     videoToEdit.title = $scope.editVideoTitle;
     videoToEdit.link = $scope.editVideoLink;
+    videosArray = $scope.videoLinks;
+    for(i = 0; i < videosArray.length ; i++){
+      if(videosArray[i].videoId == id){
+        $scope.videoLinks[i].link = getEmbedLink(videoToEdit.link);
+        $scope.videoLinks[i].title = videoToEdit.title;
+        console.log('name changed');
+      }
+    }
     localStorageService.remove(id);
     localStorageService.set(id, videoToEdit);
   };
-
-  
- 
 
 }])
 
@@ -118,30 +138,3 @@
         return $sce.trustAsResourceUrl(url);
     };
 }]);
-
-/*<!--<div ng-app="eggHeadApp">
-  <div ng-controller="MainCtrl">
-    <div id="addAVideo" class="modal fade" role="dialog" >
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add a Video</h4>
-          </div>
-          <div class="modal-body">
-            <form ng-submit="addVideo()">
-              Title: <input type="text" name="title" ng-model="videoTitle"><br/><br/>
-              Link: <input type="text" name="title" ng-model="videoLink"><br/><br/>
-          </div>
-          <div class="modal-footer">
-            <input type="button" class="btn btn-success"  value="submit">
-            <input type="submit" value="add">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div><!--add a video ends-->
-  </div>
-</div>*/

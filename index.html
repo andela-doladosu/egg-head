@@ -20,14 +20,14 @@
         </div>
     		<div>
           <button class="btn btn-success" type="button" id="addNewVideo">Add a Video</button>
-    			<button ng-click="getAllVideos()">Load</button>
-          <button ng-click="clearAll()">Clear all</button>
+    			
+          <!--<button ng-click="clearAll()">Clear all</button>-->
     			<div id="ulHolder">
             <ul>
       			 <li ng-repeat="video in videoLinks">
               <div class="videoBox inlineDiv">
                 <iframe width="" height="200" ng-src="{{video.link | trusted}}" frameborder="0" allowfullscreen></iframe>
-                <br /> Title: {{video.title}}
+                <br /> <br /> {{video.title}}
                 <br /> 
                 <button class="btn btn-primary" type="button" ng-click="likeVideo(video.videoId)">
                  Likes <span class="badge" >{{video.likes}}</span>
@@ -73,14 +73,9 @@
             <div id="editVideoFooter">
               <button type="button" class="btn btn-success" id="saveVideoButton" ng-click="saveEditedVideo()">SAVE</button>
               <button type="button" class="btn btn-danger cancelEditVideo">CANCEL</button>
-
             </div><!--editVideoFooter ends-->
           </div><!--editNewVideo div ends-->
         </div><!--backDropDiv div ends-->
-
-
-
-
     	<script src="js/app.js"></script>
     	<script src="js/controllers/mainController.js"></script>
       </div><!--row div ends-->
