@@ -27,7 +27,7 @@
       			 <li ng-repeat="video in videoLinks">
               <div class="videoBox inlineDiv">
                 <iframe width="" height="200" ng-src="{{video.link | trusted}}" frameborder="0" allowfullscreen></iframe>
-                <br /> <br /> {{video.title}}
+                <br /> <br /> <p class="videoTitle text-muted">{{video.title}}</p>
                 <br /> 
                 <button class="btn btn-primary" type="button" ng-click="likeVideo(video.videoId)">
                  Likes <span class="badge" >{{video.likes}}</span>

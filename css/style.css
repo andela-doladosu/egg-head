@@ -11,6 +11,10 @@ header{
   margin-bottom: 10px;
 }
 
+.videoTitle{
+  padding-left: 15px; 
+}
+
 #container{
   background: black;
   width: 80%;

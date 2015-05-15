@@ -21,14 +21,14 @@
 
   getAllVideos();
 
-  $scope.clearAll = function(){
-    localStorageService.clearAll();
-    $scope.videoLinks = [];
-  };
-
+  //replace youtube link from regular ending '?v=njdmkjjmklom' to 'embed/njdmkjjmklom'
   getEmbedLink = function(givenLink){
     videoAddress = givenLink.split('=')[1];
-    embedLink = 'https://www.youtube.com/embed/'+videoAddress;
+    if(videoAddress){
+      embedLink = 'https://www.youtube.com/embed/'+videoAddress;
+    }else{
+      embedLink = givenLink;
+    }
     return embedLink;
   };
 
@@ -37,8 +37,6 @@
     submittedLink = $scope.videoLink;
     newVideoLink = getEmbedLink(submittedLink);
     
-    
-
     prevKeys = localStorageService.keys().sort(function(a,b){return a-b;});//get existing keys (array)
     last_key = prevKeys[prevKeys.length - 1];//select last key (number)
     
