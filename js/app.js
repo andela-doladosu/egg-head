@@ -28,6 +28,15 @@ $(document).ready(function(){
     $('#addVideoDiv,#addVideoBackDrop').toggle(500);
   });
 
+   $('#deleteVideoButton,#cancelDeleteButton').click(function(){
+    $('#deleteVideoDiv,#deleteVideoBackDrop').hide(500);
+  });
+
+  $('.deleteButton').on('click',function(){
+    $('#deleteVideoDiv,#deleteVideoBackDrop').show(500);
+  });
+
+
 
 
 });

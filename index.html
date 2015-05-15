@@ -10,37 +10,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+  <title>Wise Potato</title>
 	</head>
   
 	<body ng-app="egghead">
     <div class="container"  ng-controller="MainCtrl">
       <div class="row">
         <div class="masthead">
-          <h3 class="text-muted">Wise Potato</h3>
+          <h1 class="text-muted appName">Wise Potato</h1>
+          <h4 id="description" class="text-muted center">User Editable Collection of YouTube Tutorial Videos</h4>
         </div>
-    		<div>
-          <button class="btn btn-success" type="button" id="addNewVideo">Add a Video</button>
-    			
-          <!--<button ng-click="clearAll()">Clear all</button>-->
-    			<div id="ulHolder">
-            <ul>
-      			 <li ng-repeat="video in videoLinks">
-              <div class="videoBox inlineDiv">
+        <div class="addVideoButton"><button class="btn btn-success" type="button" id="addNewVideo">Add a Video</button>
+        </div>
+  			<div id="ulHolder">
+          <ul>
+    			 <li ng-repeat="video in videoLinks">
+            <div class="videoBox inlineDiv">
+              <div class="iframeBox">
                 <iframe width="" height="200" ng-src="{{video.link | trusted}}" frameborder="0" allowfullscreen></iframe>
-                <br /> <br /> <p class="videoTitle text-muted">{{video.title}}</p>
-                <br /> 
-                <button class="btn btn-primary" type="button" ng-click="likeVideo(video.videoId)">
-                 Likes <span class="badge" >{{video.likes}}</span>
-                </button>
-                <button class="editButton btn btn-primary" type="button" ng-click="editAVideo(video.videoId)">Edit
-                </button>
-                <button class="btn btn-danger deleteButton" type="button" ng-click="deleteVideo(video.videoId)">Delete
-                </button>
               </div>
-      			 </li>
-      			</ul>
-          </div><!--ulHolder div ends-->
-    		</div><!--controller div ends-->
+              <p class="videoTitle text-muted">{{video.title}}</p>
+              <br /> 
+              <button class="btn btn-info" type="button" ng-click="likeVideo(video.videoId)">
+               Likes <span class="badge">{{video.likes}}</span>
+              </button>
+              <button class="editButton btn btn-primary" type="button" ng-click="editAVideo(video.videoId)">Edit
+              </button>
+              <button class="btn btn-danger deleteButton" type="button" ng-click="confirmDelete(video.videoId)">Delete
+              </button>
+            </div><!--videoBox div ends-->
+    			 </li>
+    			</ul>
+        </div><!--ulHolder div ends-->
+    		
         <div id="addVideoBackDrop"> 
           <div id="addVideoDiv">
             <div id="addVideoHead">
@@ -76,10 +78,28 @@
             </div><!--editVideoFooter ends-->
           </div><!--editNewVideo div ends-->
         </div><!--backDropDiv div ends-->
+        <div id="deleteVideoBackDrop"> 
+          <div id="deleteVideoDiv">
+            <div id="deleteVideoHead">
+              <h3 class="text-muted red">Delete Video</h3>
+            </div><!--deleteVideoHead div ends-->
+            <div id="deleteVideoBody">
+               Sure you want to delete video?
+               <br/>
+               '{{confirmDeleteTitle}}'
+            </div><!--deleteVideoBody ends-->
+            <div id="deleteVideoFooter">
+              <button type="button" id="deleteVideoButton" class="btn btn-success" ng-click="deleteVideo()">DELETE</button>
+              <button type="button" class="btn btn-danger" id="cancelDeleteButton" >CANCEL</button>
+            </div><!--deleteVideoFooter ends-->
+          </div><!--deleteideo div ends-->
+        </div><!--deleteDropDiv div ends-->
     	<script src="js/app.js"></script>
     	<script src="js/controllers/mainController.js"></script>
       </div><!--row div ends-->
   	</div><!--container div ends-->
+  </body>
+</html>
     
 
 

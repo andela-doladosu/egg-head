@@ -1,27 +1,34 @@
  eggHeadApp.controller('MainCtrl', ['$scope','localStorageService','$sce', function($scope, localStorageService, $sce) {
   //Intially get all stored videos' details from localstorage
   getAllVideos = function(){
-    lskeys = localStorageService.keys();//get stored keys into lskeys array
-    $scope.videoLinks = [];//define array to hold video details which are objects
-    lskeys = lskeys.sort(function(a,b){return a - b;});//ensure the keys are in ascending order
+    //get stored keys into lskeys array
+    lskeys = localStorageService.keys();
+    //define array to hold video details which are objects
+    $scope.videoLinks = [];
+    //ensure the keys are in ascending order
+    lskeys = lskeys.sort(function(a,b){return a - b;});
+    //push objects into predefined array
     for(key in lskeys){
-      $scope.videoLinks.push(localStorageService.get(lskeys[key]));//push objects into predefined array
+      $scope.videoLinks.push(localStorageService.get(lskeys[key]));
     }
   };
 
   //give unique id to a new entry
   assignId = function(){
-    if(last_key == undefined){//if last_key is undefined, no video exists in local storage, set it to 0
+    //if last_key is undefined, no video exists in local storage, set it to 0
+    if(last_key == undefined){
       last_key = 0;
     }else{
-      last_key = Number(last_key) + 1;//increase last key by one
+      //increase last key by one
+      last_key = Number(last_key) + 1;
     }
+    //assign last key as id of video details to be saved to localstorage
     id = last_key;
   };
 
   getAllVideos();
 
-  //replace youtube link from regular ending '?v=njdmkjjmklom' to 'embed/njdmkjjmklom'
+  //replace youtube link from regular youtube ending '?v=njdmkj' to 'embed/njdmkj'
   getEmbedLink = function(givenLink){
     videoAddress = givenLink.split('=')[1];
     if(videoAddress){
@@ -30,6 +37,10 @@
       embedLink = givenLink;
     }
     return embedLink;
+  };
+
+  $scope.frameClicked = function(){
+    console.log('frame clicked');
   };
 
   $scope.addVideo = function(){
@@ -47,11 +58,10 @@
       title : $scope.videoTitle,
       link : newVideoLink,
       likes : 0
-    } 
+    }  
 
-    console.log(video);    
-
-    if(id == 0){//no previous video in localstorage, currrent entry cant be a duplicate
+    if(id == 0){
+      //no previous video in localstorage, currrent entry cant be a duplicate
       localStorageService.set(id, video);
       $scope.videoLinks.push(video);
       console.log('first video added');
@@ -65,24 +75,27 @@
         console.log('next video added');
       }
     } 
-
   };
 
   $scope.showEditBox = function(){
     $('.editButton').on('click',function(){
-      $('#editVideoDiv,#editVideoBackDrop').toggle(500);
+      $('#editVideoDiv,#editVideoBackDrop').show(500);
     });
   };
 
-  $scope.deleteVideo = function(id){
-    $scope.text = 'A new  paragraph';
-    videosArray = $scope.videoLinks;
-    localStorageService.remove(id);
+  $scope.comfirmDelete = function(id){
     for(i = 0; i < videosArray.length ; i++){
       if($scope.videoLinks[i].videoId == id){
-        $scope.videoLinks.splice(i, 1);
+        $scope.confirmDeleteTitle = $scope.videoLinks[i].title;
+        $scope.idTodelete = $scope.videoLinks[i].videoId;
       }
     }
+  };
+
+  $scope.deleteVideo = function(){
+    deleteId = $scope.idTodelete;
+    $scope.videoLinks.splice(deleteId, 1);
+    localStorageService.remove(deleteId);
   };
 
   $scope.likeVideo = function(id){
