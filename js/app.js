@@ -3,6 +3,7 @@ var eggHeadApp = angular.module('egghead', ['LocalStorageModule','ngSanitize']);
 
 
 $(document).ready(function(){
+  
   $('#addNewVideo').click(function(){
     $('#addVideoDiv,#addVideoBackDrop').toggle(500);
     $('.form-control').val("");
@@ -14,6 +15,10 @@ $(document).ready(function(){
 
   $('.editButton').on('click',function(){
     $('#editVideoDiv,#editVideoBackDrop').toggle(500);
+  });
+
+  $('.deleteButton').on('click',function(){
+    $('#deleteVideoDiv,#deleteVideoBackDrop').show(500);
   });
 
   $('#saveVideoButton').click(function(){
@@ -31,12 +36,5 @@ $(document).ready(function(){
    $('#deleteVideoButton,#cancelDeleteButton').click(function(){
     $('#deleteVideoDiv,#deleteVideoBackDrop').hide(500);
   });
-
-  $('.deleteButton').on('click',function(){
-    $('#deleteVideoDiv,#deleteVideoBackDrop').show(500);
-  });
-
-
-
 
 });
